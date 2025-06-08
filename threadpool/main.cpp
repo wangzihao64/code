@@ -35,11 +35,11 @@ void task(void (*callback)(int*)){
     //派发任务
     q.push(callback);
 }
-void Print1(char* name){
-    cout << "画画" << *name;
+void Print1(int* name){
+    printf("线程%d正在执行任务：画画\n",*name);
 }
-void Print2(char* name){
-    cout << "吃饭" << *name;
+void Print2(int* name){
+    printf("线程%d正在执行任务：睡觉\n",*name);
 }
 void* handldFunc(void* args){
     int* name=(int*)args;
@@ -57,8 +57,8 @@ void* handldFunc(void* args){
         q.pop();
         pthread_mutex_unlock(&my_lock);
         func(name);
-
     }
+    return 0;
 }
 
 

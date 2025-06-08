@@ -3,11 +3,34 @@
 #include <vector>
 #include <queue>
 using namespace std;
+const int NUM=4;
 pthread_mutex_t my_lock = PTHREAD_MUTEX_INITIALIZER;
-#define NUM 4
 bool close=false;
-queue<void(*)(char*)> q;
-void task(void (*callback)(char*)){
+queue<void(*)(int*)> q;
+class Thread
+{
+public:
+    Thread(void* (*HandleFunc)(void*),int n=NUM)
+            :ids(n)
+    {
+        for(int i=0;i<n;i++)
+        {
+            ids[i]=i;
+            pthread_t tid;
+            pthread_create(&tid, nullptr,HandleFunc, &ids[i]);
+            tids.emplace_back(tid);
+        }
+    }
+    void ThreadJoin()
+    {
+        for(auto tid : tids){
+            pthread_join(tid, nullptr);
+        }
+    }
+    vector<pthread_t> tids;
+    vector<int> ids;
+};
+void task(void (*callback)(int*)){
 
     //派发任务
     q.push(callback);
@@ -19,7 +42,7 @@ void Print2(char* name){
     cout << "吃饭" << *name;
 }
 void* handldFunc(void* args){
-    char* name=(char*)args;
+    int* name=(int*)args;
     while(1) {
         pthread_mutex_lock(&my_lock);
         if(close&&q.empty()){
@@ -30,33 +53,26 @@ void* handldFunc(void* args){
             pthread_mutex_unlock(&my_lock);
             continue;
         }
-        char buffer[100];
-        function<void(char*)> func = q.front();
+        function<void(int*)> func = q.front();
         q.pop();
         pthread_mutex_unlock(&my_lock);
         func(name);
 
     }
 }
+
+
 int main() {
-    vector<pthread_t> tids;
-    for(int i=0;i<NUM;++i)
-    {
-        pthread_t tid;
-        char* buffer=new char[100];
-        int* args=new int(i);
-        snprintf(buffer,sizeof buffer,"%d\n",*args);
-        pthread_create(&tid, nullptr,handldFunc, buffer);
-        tids.emplace_back(tid);
-    }
+    Thread p1(handldFunc);
+    task(Print1);
+    task(Print2);
+    task(Print2);
     task(Print1);
     task(Print2);
 
 
     close=true;
-    for(auto tid : tids){
-        pthread_join(tid, nullptr);
-    }
+    p1.ThreadJoin();
 
     return 0;
 }

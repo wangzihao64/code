@@ -3,4 +3,6 @@ project(threadpool)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(threadpool main.cpp)
+add_executable(threadpool main.cpp
+        threadpool.h
+        thread.h)

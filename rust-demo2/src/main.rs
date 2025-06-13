@@ -1,3 +1,6 @@
+fn add(i:i32,j:i32){
+    i+j;
+}
 fn main() {
     let a=1;
     assert_eq!(a,1);
@@ -27,4 +30,22 @@ fn main() {
     for i in 'a'..='z' {
         println!("{}",i);
     }
+    let s='😻';
+    println!("{}",s);
+    let s='中';
+    println!("{}",size_of_val(&s));
+    let s="a";
+    println!("{}",size_of_val(&s));
+    let x = 3;
+    // if 语句块也是一个表达式，因此可以用于赋值，也可以直接返回
+    // 类似三元运算符，在Rust里我们可以这样写
+    let y = if x % 2 == 1 {
+        "odd"
+    } else {
+        "even"
+    };
+    println!("{}",y);
+    let i=1;
+    let j=1;
+    println!("{}",add(i,j));
 }

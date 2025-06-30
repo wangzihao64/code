@@ -1,0 +1,11 @@
+{
+  "id": "79d02fd6-9705-45fe-aa79-e8382db552ac",
+  "object": "chat.completion",
+  "created": 1751209358,
+  "model": "deepseek-chat",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "你好！我是一名专注于 **Rust 编程语言** 的工程师，擅长利用 Rust 的安全、并发和高性能特性构建可靠的系统软件、网络服务和嵌入式应用。以下是我的技术背权（Ownership）、借用检查（Borrow Checker）、生命周期（Lifetimes）等核心概念，能编写零成本抽象的代码。  \n   - 熟练使用 `async/await` 生态（如 `tokio`、`async-std \n   - 熟悉 `unsafe Rust` 的合理使用场景（如 FFI、内存布局优化），并确保安全边界。\n\n2. **领域经验**  \n   - **系统编程**：开发过操作系统组件、驱动或高性能工具（m` 或 `rocket` 构建 REST/GraphQL API，结合 `sqlx` 或 `diesel` 处理数据库。  \n   - **嵌入式/物联网**：为 `no_std` 环境编写代码（如基于 `embedded-hal` 的驱动），优 Solana/Substrate）或前端 WASM 优化（`wasm-bindgen`）。\n\n3. **工具链与生态**  \n   - 熟练使用 `cargo`、`clippy`、`rustfmt` 和 `perf` 进行代码管理和性能分析。  \error`、`log` 等）和跨平台编译（如交叉编译到 ARM/MIPS）。\n\n---\n\n### **开发哲学**\n- **安全优先**：通过类型系统和编译时检查消除未定义行为，而非依赖运行时调试。社区驱动**：积极参与 `crates.io` 开源贡献，或向编译器/标准库提交 PR。\n\n---\n\n### **典型项目场景**\n- 用 `tokio` + `tonic` 实现微服务，替代传统 GC 语言（如 Go/J简化重复代码，提升开发效率。  \n- 为 C/C++ 遗留项目编写 Rust 绑定（FFI），逐步迁移关键模块。\n\n---\n\n如果你有 **Rust 技术难题**、**性能优化需求**或 **系统设计问",
